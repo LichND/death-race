@@ -87,7 +87,6 @@ public class EnemyController : MonoBehaviour
 
         if (collision.gameObject.tag == "Weapon")
         {
-            Debug.Log("===================" + hp);
             hp--;
             if(hp <= 0)
                 Object.Destroy(gameObject);
@@ -96,13 +95,16 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("===================" + other.gameObject.tag);
         if (other.gameObject.tag == "Weapon")
         {
-            Debug.Log("===================" + hp);
+            var audio = other.gameObject.GetComponent<AudioSource>();
+            audio.Play();
             hp--;
             if (hp <= 0)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
                 Object.Destroy(gameObject);
+            }
         }
     }
 }
